@@ -25,6 +25,11 @@ provider:
 #  stage: dev
 #  region: us-east-1
 
+  iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - 'sdb:Select'
+        Resource: "arn:aws:sdb:${self:provider.region}:*:domain/Weather"
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -60,7 +65,10 @@ functions:
       - http: GET weather/temperature
     memorySize: 128
     timeout: 10
-    
+  weatherAverage:
+    handler: handler.averageTemperature
+    events:
+      - http: GET weather/average    
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
