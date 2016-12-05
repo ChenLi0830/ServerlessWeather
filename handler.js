@@ -6,7 +6,7 @@ module.exports.currentTemperature = (event, context, callback) => {
     statusCode: 200,
     header: {
       'Access-Control-Allow-Origin': '*'
-    }
+    },
     body: JSON.stringify({
       temperature: 30,
       locationId: event.queryStringParameters.id,
